@@ -1,0 +1,51 @@
+Login/Reg: 
+    User:
+        - Look at class methods and update where necessary - DONE
+    Member:
+        - Validation for uuid household ID - DONE
+        - Write getByUsername query for login - DONE
+        - query to ensure unique username - DONE
+        - App route for register - DONE
+        - Write/Update class methods for SQL queries - DONE
+
+
+Dashboards:
+    - User:
+        - Conditional rendering not working - DONE
+        - Add a view for hashed household ID - DONE (revisit, make it prettier)
+        - Display chores properly
+            - Render through object onto dashboard - DONE
+            - ONLY show chores for current household - DONE
+        - Actions:
+            - View
+                - Format datetime for opened at - DONE
+                - Completed By - DONE
+            - Edit - DONE 
+            - Complete - Update query is working - but not assigning completed by
+            - Remove - DONE
+
+    Member:
+        - Member Dashboard template - DONE
+        - Display chores properly - DONE
+        - Display ONLY chores for current household - DONE
+        - Actions:
+            - View
+                - Format Datetime for opened at - DONE
+                - Completed by - DONE
+            - Finished (needs review) - DONE
+
+    Member List - delete member (if logged in user)
+
+Household:
+    - Class methods for SQL queries - DONE
+    - App routes for household routes - DONE
+    - Create household template - DONE
+    - Edit household template - DONE
+    - UUID for household ID - DONE
+    - get all members by HH ID - DONE
+
+Chores: 
+    - Class methods for SQL queries - DONE
+    - Create chore template - DONE
+    - Edit chore template - DONE
+    - View chore template - DONE

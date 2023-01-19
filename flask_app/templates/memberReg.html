@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <title>Chore Tracker</title>
+</head>
+<body>
+    <header class="navbar">
+        <h1>Welcome to Chore Tracker!</h1>
+        <a class="navlink btn btn-secondary" href="/">To Parent Login/Registration</a>
+    </header>
+    <div id="intro_box">
+        <p>Chore tracker is your go to site for tracking your assigned chores! To begin, please register as a member of your household below. You will need the household ID from your parent. 
+        Once registered, you will be able to view and finish your assigned chores! Please remember your username and password as you will need these to login.
+        </p>
+        <p>If you are a parent of an existing household or would like to register and create a new household, please navigate to our Parent Login and Registration in the top right corner.</p>
+    </div>
+    <div class="d-flex justify-content-around mt-3 mb-4">
+        <form action="/member/register" method="post" class="col-4 p-4">
+            <h2>Child Registration</h2>
+            {% with messages = get_flashed_messages(category_filter=["regError"]) %}
+                {% if messages %}
+                <div class="alert alert-danger" role="alert">
+                    {% for message in messages %}
+                        <p class="error">{{message}}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            {% endwith %}
+            <div class="form-group">
+                <label for="household_id">Household ID:</label>
+                <input type="text" name="household_id" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="name">First Name:</label>
+                <input type="text" name="name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" name="username" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" name="password" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="passConf">Confirm Password:</label>
+                <input type="password" name="passConf" class="form-control">
+            </div>
+
+            <input type="submit" value="Register" class="btn btn-secondary">
+        </form>
+        <form action="/member/login" method="post" class="col-4 p-4">
+            <h2>Child Login</h2>
+            {% with messages = get_flashed_messages(category_filter=["loginError"]) %}
+                {% if messages %}
+                <div class="alert alert-danger">
+                    {% for message in messages %}
+                        <p class="error">{{message}}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            {% endwith %}
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" name="username" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" name="password" class="form-control">
+            </div>
+
+            <input type="submit" value="Login" class="btn btn-secondary">
+        </form>
+    </div>
+</body>
+</html>

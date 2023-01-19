@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <title>View Chore</title>
+</head>
+<body>
+    <header class="navbar p-3">
+        <h1>Chore Tracker</h1>
+        {% if session['user_id'] %}
+            <h2>{{current_user.first_name}} {{current_user.last_name}}</h2>
+                {%  elif session['member_id'] %}
+                    <h2>{{current_member.name}}</h2>
+        {% endif %}
+        {% if 'user_id' in session %}
+        <a href="/user/home" class="btn btn-secondary">Dashboard</a>
+        {% elif 'member_id' in session %}
+        <a href="/member/home" class="btn btn-secondary"> My Dashboard</a>
+        {% endif %}
+        <a href="/logout" class="btn btn-secondary">Logout</a>
+    </header>
+    <div class="results_box">
+        <input type="hidden" name="id" value="{{chore.id}}">
+        <!-- <div class="results_box"> -->
+            <h3 class="results">{{chore.title}}</h3>
+            <div class="results">
+                <label for="description">Description:</label>
+                <p name="description">{{chore.description}}</p>
+            </div>
+            <div class="results">
+                <label for="points">Points:</label>
+                <p name="points">{{chore.points}}</p>
+            </div>
+            <div class="results">
+                <label for="due_date">Due Date:</label>
+                <p name="due_date">{{chore.due_date.strftime("%B %d %Y")}}</p>
+            </div>
+            <div class="results">
+                <label for="created_at">Chore Opened At:</label>
+                <p name="created_at">{{chore.created_at.strftime("%B %d %Y")}}</p>
+            </div>
+            <div class="results">
+                <label for="status">Status:</label>
+                <p name="status">{{chore.status}}</p>
+            </div>
+            <div class="results">
+                <label for="completed_by">Completed by:</label>
+                <p name="completed_by">
+                    {% if chore.status != 'Completed' %}
+                    Chore Not Completed
+                    {% endif %}
+                    {% if chore.status == 'Completed' %}
+                    {{chore.completed_by}} on {{chore.updated_at.strftime("%B %d %Y")}}
+                    {% endif %}
+                </p>
+            </div>
+        <!-- </div> -->
+    </div>
+</body>
+</html>

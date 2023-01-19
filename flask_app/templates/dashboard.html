@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue&family=Roboto+Mono&display=swap" rel="stylesheet">
+    <title>Household Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <header class="navbar p-3">
+            <h3>Welcome, {{current_user.first_name}}</h3>
+            <a href="/logout" class="btn btn-secondary">Logout</a>
+            {% if household.id != None %}
+                <a href="/household/edit/{{ current_user.id}}" class="btn btn-secondary">Edit Household</a>
+                {% elif household.id == None %}
+                    <a href="/household" class="btn btn-secondary">Create Household</a>
+            {% endif %}
+            <a href="/chore" class="btn btn-secondary">Add a Chore</a>
+        </header>
+        {% if household.id == None %}
+            <h3>No Household created</h3>
+        {% endif %}
+        {% if household.id != None %}
+        <div>
+            <h2 class="text-center">The {{household.family_name}} Household</h2>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Chore</th>
+                        <th>Status</th>
+                        <th>Points</th>
+                        <th>Assigned To:</th>
+                        <th>Due Date:</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for chore in all_chores %}
+                    <tr>
+                        {% if chore.household_id == household.id %}
+                        <td class="tableData">{{chore.title}}</td>
+                        <td class="tableData">{{chore.status}}</td>
+                        <td class="tableData">{{chore.points}}</td>
+                        <td class="tableData">{{chore.member.name}}</td>
+                        <td class="tableData">{{chore.due_date.strftime("%B %d %Y")}}</td>
+                        <td class="tableData">
+                            <a href="/chore/user/view/{{chore.id}}">View</a> |
+                            <a href="/chore/edit/{{chore.id}}">Edit</a> |
+                            <a href="/chore/delete/{{chore.id}}">Remove</a>
+                            {% if chore.status == 'Needs Review' %}|
+                            <a href="/chore/complete/{{chore.id}}">Mark Complete</a>
+                            {% endif %}
+                        </td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Member</th>
+                        <th>Username</th>
+                        <th>Member ID</th>
+                        <th>Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for member in all_members %}
+                    <tr>
+                        {% if member.household_id == household.id %}
+                        <td class="tableData">{{member.name}}</td>
+                        <td class="tableData">{{member.username}}</td>
+                        <td class="tableData">{{member.id}}</td>
+                        <td class="tableData">{{member.points}}</td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <p>My Household ID: {{household.id}}</p>
+        <!-- <a href="/household/delete/{{household.id}}">Delete my Household</a> -->
+    </div>
+    {% endif %}
+</body>
+</html>

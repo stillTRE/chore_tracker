@@ -1,0 +1,46 @@
+Name: Trevor Tompkins
+Stack: Python
+GitHub Repo: https://github.com/stillTRE/chore_tracker
+Wireframe link: (or PDF attached) :   https://wireframe.cc/pro/pp/2d0124ea9618486
+Project Name: Household Chore Tracker
+Project Description: I like the chore tracker wireframe from the platform, but where that reads as a site for people to pick up odd jobs, I want to turn this into 
+a Household Chore Tracker for parents to create chores for their children to track and complete. Parents can create their household and have an 'admin' type account. Children can have 
+subsidiary accounts that are tied to the household/parent with limited functionality.
+MVP (Minimum Viable Product) Features: 
+    - Login/Reg - 
+        - Mostly standard login/Reg
+        - Account type: Parent or Child
+        - If selecting child account during reg - conditional render for additional field to select household (i.e. child account can't create without being tied to household)
+    - Households - 
+        - Household can only be created by parent account
+        - Only parent can edit household 
+        - Children can only join household when registering (and can't register without doing so)
+        - Logged in parent will automatically be assigned as "head of household" or something similar
+        - Only show info for logged in househould (instance)
+    - Chores - 
+        - Parents can create/edit/delete chores and complete chores
+        - Children can only view and mark chores as complete
+        - Completed chores to have a "completed by:" field and timestamp
+        - Only show chores for logged in household (instance)
+        - Chore status - Open, in progress, complete
+        - Completed chores will remain in dashboard until parents remove
+Bonus Features:
+    - Additional parent can join household post household creation
+    - Parents can create a child account from their own account 
+    - Parents can assign the chore to a child or leave it as open to all
+    - History of completed jobs
+    - Point/Reward system
+        - Each chore has a point value associated 
+        - Child completing the chore will credit their account with the associated points
+            - Parent completing a chore that is assigned to a child will deduct the points from the child's account
+        - Eventual redemption method:
+            - Child can turn in points for specific rewards, set by parents
+            - Redemption takes away the points from child's account
+            - Need to figure out where the redemption will show in the parent account
+    - Parents can mark a chore as complete by a child? 
+    - Dark mode? 
+    - Recurring chores
+        - Create chores with recurring timelines, daily, weekly, monthly
+    - Chore due dates - Done
+    - "Social" feed of created/edited/completed chores
+    - Alerts for parents when chores are completed - obsolete due to changing of how chores completed - maybe a needs review alert
